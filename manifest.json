@@ -2,7 +2,7 @@
   "key": "timezone-widget",
   "name": "Timezone Widget",
   "version": "1.0.0",
-  "description": "",
+  "description": "Display the current time in multiple timezones as a widget in YouTrack or Hub",
   "author": "Grant Nosbush",
   "iconUrl": "assets/time-zone.png",
   "products": {
