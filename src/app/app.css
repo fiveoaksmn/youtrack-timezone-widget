@@ -1,0 +1,57 @@
+/*
+    References:
+        https://jetbrains.github.io/ring-ui/master/index.html?path=/story/style-only-theme-palette--basic
+*/
+
+:global(.widget-body) {
+    overflow-x: hidden;
+    margin: 0;
+    padding: calc(var(--ring-unit) * 2);
+    background: var(--ring-content-background-color);
+    font-size: var(--ring-font-size);
+}
+
+.widget {
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    font-family: var(--ring-font-family);
+    font-size: var(--ring-font-size);
+}
+
+.timeZone {
+    text-align: center;
+}
+
+.timeZone:not(:first-child) {
+    border-top: solid 1px var(--ring-line-color);
+    padding-top: 10px;
+}
+
+.timeZoneName {
+    font-size: 150%;
+    color: var(--ring-secondary-color);
+}
+
+.timeZoneValue {
+    padding-bottom: 10px;
+}
+
+.timeZoneDate {
+    font-size: 70%;
+    margin-right: 20px;
+}
+
+.timeZoneTime {
+    font-size: 150%
+}
+
+.additionalSettings {
+    margin-top: 20px;
+}
+
+.simpleLine {
+    width: 100%;
+    border-top: solid 1px var(--ring-line-color);
+    margin-bottom: 20px;
+}

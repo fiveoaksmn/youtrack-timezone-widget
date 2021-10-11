@@ -1,0 +1,21 @@
+{
+  "key": "timezone-widget",
+  "name": "Timezone Widget",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Grant Nosbush",
+  "iconUrl": "assets/time-zone.png",
+  "products": {
+    "Hub": "2020.1",
+    "YouTrack": "2020.1"
+  },
+  "view": {
+    "defaultWidth": 2,
+    "defaultHeight": 2
+  },
+  "dependencies": {
+    "Hub": ">=2020.1",
+    "YouTrack": ">=2020.1"
+  }
+}
+
