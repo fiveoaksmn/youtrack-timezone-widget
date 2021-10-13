@@ -12,6 +12,8 @@ import Checkbox from '@jetbrains/ring-ui/components/checkbox/checkbox';
 import moment from "moment";
 import "moment-timezone";
 import { v4 as uuid } from "uuid";
+import upIcon from '@jetbrains/icons/chevron-up.svg';
+import downIcon from '@jetbrains/icons/chevron-down.svg';
 import deleteIcon from '@jetbrains/icons/cancelled.svg';
 import styles from './app.css';
 
@@ -128,6 +130,15 @@ class Widget extends Component{
         return { key:"", label: "" };
     }
 
+    moveTimeZone( index, direction ){
+        let timeZones = this.state.timeZones;
+        if( ( index === 0 && direction < 0 ) || ( index > ( timeZones.length - 1 ) && direction > 0 ) ){
+            return;
+        }
+        timeZones[ index ] = timeZones.splice( ( index + direction ), 1, timeZones[ index ] )[ 0 ];
+        this.setState({ timeZones: timeZones } );
+    }
+
     removeTimeZone( key ){
         let timeZones = this.state.timeZones;
         for (let i = 0; i < this.state.timeZones.length; i++) {
@@ -198,6 +209,7 @@ class Widget extends Component{
         if( this.state.timeZones.length === 0 ){
             this.addTimeZone();
         }
+        let last = this.state.timeZones.length - 1;
 
         return (
             <div className={styles.widget}>
@@ -218,7 +230,7 @@ class Widget extends Component{
                             onSelect={ selected => this.changeTimeZone( tz.key, selected ) }
                         />
                         </Col>
-                        <Col xs={11} sm={11} md={11} lg={11}>
+                        <Col xs={9} sm={9} md={9} lg={9}>
                         <Input
                         size={ InputSize.AUTO }
                         placeholder="Name"
@@ -228,9 +240,25 @@ class Widget extends Component{
                         </Col>
                         <Col xs={1} sm={1} md={1} lg={1}>
                         <Button
-                            icon={deleteIcon}
+                            icon={ upIcon }
                             primary={ false }
-                            disabled={this.state.timeZones.length <= 1}
+                            disabled={ index === 0 }
+                            onClick={ e => this.moveTimeZone( index, -1 ) }
+                        >{}</Button>
+                        </Col>
+                        <Col xs={1} sm={1} md={1} lg={1}>
+                        <Button
+                            icon={ downIcon }
+                            primary={ false }
+                            disabled={ index === last }
+                            onClick={ e => this.moveTimeZone( index, 1 ) }
+                        >{}</Button>
+                        </Col>
+                        <Col xs={1} sm={1} md={1} lg={1}>
+                        <Button
+                            icon={ deleteIcon }
+                            primary={ false }
+                            disabled={ this.state.timeZones.length <= 1 }
                             onClick={ e => this.removeTimeZone( tz.key ) }
                         >{}</Button>
                         </Col>
@@ -303,12 +331,12 @@ class Widget extends Component{
             let time;
             if( tz.tz === "Local" ){
                 if( showDate ){
-                    date = moment().format( dateFormat ) + " ";
+                    date = moment().format( dateFormat );
                 }
                 time = moment().format( timeFormat );
             }else if( tz.tz !== undefined && tz.tz.length > 0 ){
                 if( showDate ){
-                    date = moment().tz( tz.tz ).format( dateFormat ) + " ";
+                    date = moment().tz( tz.tz ).format( dateFormat );
                 }
                 time = moment().tz( tz.tz ).format( timeFormat );
             }
